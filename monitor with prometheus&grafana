@@ -1,0 +1,36 @@
+What is Prometheus?
+
+Prometheus is an open source monitoring tool
+Provides out-of-the-box monitoring capabilities for the Kubernetes container orchestration platform. It can monitor servers and databases as well.
+Collects and stores metrics as time-series data, recording information with a timestamp 
+It is based on pull and collects metrics from targets by scraping metrics HTTP endpoints.
+
+What is Grafana?
+
+Grafana is an open source visualization and analytics software. 
+It allows you to query, visualize, alert on, and explore your metrics no matter where they are stored.
+
+
+Key components:-
+
+    1. Prometheus server - Processes and stores metrics data
+    2. Alert Manager - Sends alerts to any systems/channels
+    3. Grafana - Visualize scraped data in UI
+
+
+Implementation steps:-
+
+We need to add the Helm Stable Charts for your local client. Execute the below command:
+$ helm repo add stable https://charts.helm.sh/stable
+# Add prometheus Helm repo
+$ helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+$ helm search repo prometheus-community
+$ kubectl create namespace prometheus
+$ helm install stable prometheus-community/kube-prometheus-stack -n prometheus
+$ kubectl get pods -n prometheus
+$ kubectl get svc -n prometheus
+## change cluster ip to nodeport
+$ kubectl edit svc stable-kube-prometheus-sta-prometheus -n prometheus
+Edit Grafana Service:-
+
+$ kubectl edit svc stable-grafana -n prometheus
